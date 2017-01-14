@@ -23,16 +23,21 @@ neg_prob = 0
 for line in codecs.open("test.txt.chasen","r","euc-jp"):
     line = line.rstrip('\r\n')
     if line == "EOS":
-        pass
+        if pos_prob > neg_prob:
+            print 'positive' , pos_prob
+        elif neg_prob > pos_prob:
+            print 'negative', neg_prob
+        else :
+            print 'Equal'
 
     else:
         lis = line.split("\t")
         if lis[0] in pos_dict:
-            pos_prob +=  pos_dict[1]
+            pos_prob +=  math.log(pos_dict[lis[0]])
         else:
-            pos_prob += 0.00001
+            pos_prob += math.log(0.00001)
 
         if lis[0] in neg_dict:
-            neg_prob +=  neg_dict[1]
+            neg_prob +=  math.log(neg_dict[lis[0]])
         else:
-            neg_prob += 0.00001
+            neg_prob += math.log(0.00001)
