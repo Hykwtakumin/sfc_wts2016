@@ -21,11 +21,17 @@ api = tweepy.API(auth)
 # for tweet in mentions:
 #     print tweet.text, tweet.user.screen_name
 
-# ツイートを送信
-try:
-    # api.update_status(status='Hello, world!')
-    print api.direct_messages()[0]
-except tweepy.TweepError as e:
-    print e
+# # ツイートを送信
+# try:
+#     # api.update_status(status='Hello, world!')
+#     print api.direct_messages(count=5,include_entities='false')[1].text
+# except tweepy.TweepError as e:
+#     print e
 
 #自分宛てのDMを取得して表示する
+DMs = api.direct_messages(count=20)
+try:
+    for tweet in DMs:
+        print tweet.text
+except tweepy.TweepError as e:
+    print e
