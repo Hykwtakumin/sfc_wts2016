@@ -24,10 +24,10 @@ import re
 
 inm_re_lists = []
 for line in codecs.open("inm_re_lists.txt", "r", "utf-8"):
-    inm_re_lists.append(line.rstrip().encode("utf-8"))
+    inm_re_lists.append(line.rstrip().encode('utf-8'))
 
 for line in inm_re_lists:
-    print line.decode("utf-8")
+    print line.decode('utf-8')
 
 test_text = 'FF外から失礼するゾ～（謝罪） このツイート面白スギィ！！！！！自分、RTいいっすか？ 淫夢知ってそうだから淫夢のリストにぶち込んでやるぜー いきなりリプしてすみません！許してください！なんでもしますから！(なんでもするとは言ってない)'
 
@@ -46,3 +46,11 @@ inm_re = '(?:'+ "|".join(inm_re_lists) +')'
 matchedList = re.findall(inm_re,test_text)
 if matchedList:
     print len(matchedList)
+    if len(matchedList) == 1:
+        print ('淫夢語録が1語含まれていますが、ネタ度は低いと思われます')
+    elif len(matchedList) > 1 and len(matchedList) < 5:
+        print ('淫夢語録が') + str(len(matchedList)) + ('語含まれているので投稿主は淫夢民である可能性があります。')
+    elif len(matchedList) >= 5:
+        print ('淫夢語録が') + str(len(matchedList)) + ('語含まれてる。間違いなく淫夢厨だってハッキリわかんだね')
+    else:
+        print('分析ができませんでした')
