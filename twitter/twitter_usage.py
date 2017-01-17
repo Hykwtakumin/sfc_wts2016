@@ -51,7 +51,7 @@ for tweet in timeline:
     print u'発言時間:\t%s' % tweet.created_at
 
 # ツイートを送信
-text = 'Hello, world!'
+text = u'メッセージの重複投稿のerrocodeが187だったんけどちょっと待ってそれってクッキー☆ネタだよね?'
 try:
     api.update_status(status=text)
     print u'[以下の内容でツイートしました]'
@@ -62,7 +62,7 @@ except tweepy.TweepError as e:
 
 # リプライを送信
 user = 'wts16test'
-text = u'@%s リプライのテスト' % user
+text = u'@%s メッセージの重複投稿のerrocodeが187だったんけどちょっと待ってそれってクッキー☆ネタだよね?' % user
 try:
     api.update_status(status=text)
     print u'[以下の内容でリプライしました]'

@@ -4,6 +4,8 @@ from os.path import isfile
 import fcntl
 from fcntl import flock
 import tweepy
+import codecs
+import re
 
 consumer_key        = 'MjFWBvCRciIiSmroC2m2Ox1eR'    #右の4つはAPIの操作に必要なコードです(本当は直書きはマズイ)
 consumer_secret     = 'JwRC9Hj2OhhjPaKCwm2q5CY8hu32krIzzvXO3qgwkkv5jU7xNG'
@@ -36,11 +38,27 @@ mentions = api.mentions_timeline(count=10)
 for tweet in mentions:
     if not tweet.id in data:
         try:
-            api.update_status(
-                status='@%s Hello!' % (tweet.user.screen_name),
-                in_reply_to_status_id=tweet.id
-            )
+            # api.update_status(
+            #     status='@%s Hello!' % (tweet.user.screen_name),
+            #     in_reply_to_status_id=tweet.id
+            # )
+            test_text = tweet.text
+            print test_text
+            pattern = re.compile(r'[こそ]れ?マジ?[\?？]')
+            matchObj = pattern.search(test_text)
+            if matchObj:
+                print matchObj.group()
+                api.update_status(
+                    status = u'@%s 語録が検出されました' % (tweet.user.screen_name),
+                    in_reply_to_status_id=tweet.id
+                )
+            else:
+                api.update_status(
+                    status = u'@%s 語録は検出されませんでした' % (tweet.user.screen_name),
+                    in_reply_to_status_id=tweet.id
+                )
             data.append(tweet.id)
+            print str(data)
         except tweepy.TweepError as e:
             print e
     else:
