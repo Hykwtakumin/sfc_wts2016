@@ -72,7 +72,7 @@ client.get('account/verify_credentials',
                   if (inm_counts == 0) {
 
                     params = {
-                      status : '@' +tweet.user.screen_name + '\n淫夢語録は特に検出されませんでした。',
+                      status : '@' +tweet.user.screen_name + '\n語録は特に検出されませんでした。',
                       in_reply_to_status_id : tweet.id
                     }
                     client.post('statuses/update',params,function(error, tweet, response){
@@ -82,7 +82,7 @@ client.get('account/verify_credentials',
                     });
                   }else{
                     params = {
-                      status : '@' + tweet.user.screen_name + '\n淫夢語録は' + inm_counts + '個検出されました。\n' +
+                      status : '@' + tweet.user.screen_name + '\n語録は' + inm_counts + '個検出されました。\n' +
                       '検出された語録は\n' + inm_array + '\nです。',
                       in_reply_to_status_id : tweet.id
                     }
